@@ -1,7 +1,11 @@
 import Employee from "../model/Employee";
 import ApiClient from "./ApiClient";
-
+import axios from 'axios';
+const axiosInstance = axios.create({
+    baseURL: "http://localhost:3000/employees"
+})
 export class ApiClientJsonServer implements ApiClient {
+    
     addEmployee(empl: Employee): Promise<Employee> {
         throw new Error("Method not implemented.");
     }
@@ -14,10 +18,9 @@ export class ApiClientJsonServer implements ApiClient {
     getEmployee(id: number): Promise<Employee | null> {
         throw new Error("Method not implemented.");
     }
-    getAll(config?: { headers?: any; params?: any; }): Promise<Employee[]> {
-        //TODO
-        //write implementation getting data from http://localhost:3000/employees based on AXIOS package
-        return Promise.resolve([]);
+    async getAll(config?: { headers?: any; params?: any; }): Promise<Employee[]> {
+       const res = await axiosInstance.get<Employee[]>("/", config);
+        return res.data;
     }
     getBySalary(minSalary: number, maxSalary: number, config?: { headers?: any; params?: any; }): Promise<Employee[]> {
         throw new Error("Method not implemented.");
