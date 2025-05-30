@@ -1,5 +1,4 @@
 import { Avatar, Spinner, Table, Text } from "@chakra-ui/react";
-import React from "react";
 import useEmployees from "../hooks/useEmployees";
 
 const EmployeesTable = () => {
