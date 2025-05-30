@@ -3,6 +3,7 @@ import useEmployees from "../hooks/useEmployees";
 import { QueryFunction } from "@tanstack/react-query";
 import Employee from "../model/Employee";
 import { FC } from "react";
+import DepartmentSelector from "./DepartmentSelector";
 interface Props {
   queryFn: QueryFunction<Employee[]>
 }
@@ -15,10 +16,11 @@ const EmployeesTable: FC<Props> = ({queryFn}) => {
       ) : (
         <>
           {isLoading && <Spinner></Spinner>}
-          <Table.ScrollArea borderWidth="1px" rounded="md" height="85vh">
-            <Table.Root size="sm" stickyHeader>
+          <DepartmentSelector></DepartmentSelector>
+          <Table.ScrollArea borderWidth="1px" rounded="md" height="85vh" >
+            <Table.Root size="sm" stickyHeader className="table">
               <Table.Header>
-                <Table.Row bg="bg.subtle">
+                <Table.Row bg="bg.subtle" zIndex={"auto"}>
                   <Table.ColumnHeader hideBelow={"md"}></Table.ColumnHeader>
                   <Table.ColumnHeader>Name</Table.ColumnHeader>
                   <Table.ColumnHeader>Department</Table.ColumnHeader>
