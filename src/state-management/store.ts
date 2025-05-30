@@ -1,21 +1,34 @@
+import { StatHelpText } from '@chakra-ui/react';
 import {create} from 'zustand'
-// interface EmployeesQuery {
-//     birthDate_gt:string | null;
-//     birthDate_lt:string | null;
-//     salary_gt:string | null;
-//     salary_lt:string | null;
-//     department:string | null;
+interface EmployeesQuery {
+   department:string | null;
+    min: number | null,
+    max: number | null
 
-// }
-interface EmployeesStore {
-    department:string | null;
-    setDepartment: (department: string|null) => void;
 }
-const useDepartment = create<EmployeesStore> (set => ({
-    department: null,
-    setDepartment: (department: string | null) => set(() => ({
-        department
-    }))
+interface EmployeesStore {
+    employeeQuery: EmployeesQuery;
+    setDepartment: (department: string|null) => void;
+    setMin: (min: number|null) => void;
+    setMax: (max: number|null) => void
+}
 
-}))
-export default useDepartment
+const useEmployeesQuery = create<EmployeesStore>(set => (
+    {
+        employeeQuery: {} as EmployeesQuery,
+        setDepartment: (department: string | null) => set((state) => ({
+            employeeQuery: {...state.employeeQuery, department}
+        })),
+        setMin: (min: number | null) => set((state) => (
+            {
+                employeeQuery: {...state.employeeQuery, min}
+            }
+        )),
+        setMax: (max: number | null) => set((state) => (
+            {
+                employeeQuery: {...state.employeeQuery, max}
+            }
+        ))
+    }
+))
+export default useEmployeesQuery;

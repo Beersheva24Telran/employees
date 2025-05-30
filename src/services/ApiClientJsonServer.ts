@@ -4,7 +4,7 @@ import axios from 'axios';
 const axiosInstance = axios.create({
     baseURL: "http://localhost:3000/employees"
 })
-export class ApiClientJsonServer implements ApiClient {
+class ApiClientJsonServer implements ApiClient {
     
     addEmployee(empl: Employee): Promise<Employee> {
         throw new Error("Method not implemented.");
@@ -30,3 +30,4 @@ export class ApiClientJsonServer implements ApiClient {
     }
     
 }
+export const apiClient = new ApiClientJsonServer();

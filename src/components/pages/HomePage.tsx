@@ -1,9 +1,13 @@
-import React from 'react'
 import EmployeesTable from '../EmployeesTable'
+import useEmployeesQuery from '../../state-management/store'
+import { apiClient } from '../../services/ApiClientJsonServer';
 
 const HomePage = () => {
+    const department = useEmployeesQuery(s => s.employeeQuery.department);
+    
+
   return (
-    <EmployeesTable></EmployeesTable>
+    <EmployeesTable queryFn={() => apiClient.getAll({params: {department}})}></EmployeesTable>
   )
 }
 

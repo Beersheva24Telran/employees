@@ -1,8 +1,13 @@
 import { Avatar, Spinner, Table, Text } from "@chakra-ui/react";
 import useEmployees from "../hooks/useEmployees";
-
-const EmployeesTable = () => {
-  const { data: employees, error, isLoading } = useEmployees();
+import { QueryFunction } from "@tanstack/react-query";
+import Employee from "../model/Employee";
+import { FC } from "react";
+interface Props {
+  queryFn: QueryFunction<Employee[]>
+}
+const EmployeesTable: FC<Props> = ({queryFn}) => {
+  const { data: employees, error, isLoading } = useEmployees(queryFn);
   return (
     <>
       {error ? (

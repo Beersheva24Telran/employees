@@ -1,11 +1,9 @@
-import {useQuery} from '@tanstack/react-query';
-import { ApiClientJsonServer } from '../services/ApiClientJsonServer';
+import {QueryFunction, useQuery} from '@tanstack/react-query';
 import Employee from '../model/Employee';
-const apiClient = new ApiClientJsonServer();
-const useEmployees = () => {
+const useEmployees = (queryFn: QueryFunction<Employee[]>) => {
   return useQuery<Employee[], Error>({
     queryKey: ["employees"],
-    queryFn: () => apiClient.getAll(),
+    queryFn,
     staleTime: 5000,
     refetchInterval: 5000
   })
