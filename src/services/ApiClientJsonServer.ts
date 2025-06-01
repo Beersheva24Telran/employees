@@ -41,7 +41,17 @@ class ApiClientJsonServer implements ApiClient {
     maxAge: number,
     config?: { headers?: any; params?: any }
   ): Promise<Employee[]> {
-    throw new Error("Method not implemented.");
+    const dateMin = getDateFromAge(maxAge);
+    const dateMax = getDateFromAge(minAge);
+    
+    return this.getAll(config).then(data => data.filter(e =>e.birthDate >= dateMin && e.birthDate <= dateMax ));
   }
 }
 export const apiClient = new ApiClientJsonServer();
+function getDateFromAge(age: number): string {
+  const date = new Date();
+  date.setDate(1);
+  date.setMonth(0);
+  date.setFullYear(date.getFullYear() - age);
+  return date.toISOString().substring(0, 10);
+}

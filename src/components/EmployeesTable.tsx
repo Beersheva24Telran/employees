@@ -26,8 +26,8 @@ const EmployeesTable: FC<Props> = ({queryFn}) => {
                   <Table.ColumnHeader hideBelow={"md"}></Table.ColumnHeader>
                   <Table.ColumnHeader>Name</Table.ColumnHeader>
                   <Table.ColumnHeader>Department</Table.ColumnHeader>
-                  <Table.ColumnHeader  hideBelow={"md"} >Salary</Table.ColumnHeader>
-                  <Table.ColumnHeader  hideBelow={"md"} >Birthdate</Table.ColumnHeader>
+                  <Table.ColumnHeader  hideBelow={"sm"} >Salary</Table.ColumnHeader>
+                  <Table.ColumnHeader  hideBelow={"sm"} >Birthdate</Table.ColumnHeader>
                 </Table.Row>
               </Table.Header>
               <Table.Body>
@@ -41,8 +41,8 @@ const EmployeesTable: FC<Props> = ({queryFn}) => {
                     </Table.Cell>
                     <Table.Cell>{empl.fullName}</Table.Cell>
                     <Table.Cell>{empl.department}</Table.Cell>
-                    <Table.Cell  hideBelow={"md"}>{empl.salary}</Table.Cell>
-                    <Table.Cell  hideBelow={"md"}>{empl.birthDate}</Table.Cell>
+                    <Table.Cell  hideBelow={"sm"}>{empl.salary}</Table.Cell>
+                    <Table.Cell  hideBelow={"sm"}>{empl.birthDate}</Table.Cell>
                   </Table.Row>
                 ))}
               </Table.Body>

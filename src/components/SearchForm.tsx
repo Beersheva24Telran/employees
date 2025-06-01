@@ -55,10 +55,10 @@ function resetFields() {
             <Field.Label>Search Type</Field.Label>
             <NativeSelect.Root size="sm" width={{
                 base: "80vw",
-                sm: "28vw"
+                sm: "20vw"
             }}>
               <NativeSelect.Field
-                placeholder="Select search by type"
+                placeholder="search type"
                 {...register("type", {
                   required: true,
                   onChange: (event) => {resetSearchObject();setType(event.target?.value);resetField("min",{defaultValue:null});resetField("max",{defaultValue:null})},
@@ -74,17 +74,17 @@ function resetFields() {
         {type && (
           <Field.Root invalid={!!errors.min}>
             <Field.Label>minimal value for {type}</Field.Label>
-            <Input
+            <Input size="xs"
               width={{
                 base: "80vw",
-                sm: "25vw"
+                sm: "20vw"
             }}
               {...register("min", {
                 required: true,
                 min: ranges[type].min,
                 max: ranges[type].max,
                 onChange: (event) => setMinValue(+event.target.value + 1),
-              })} placeholder={`[${ranges[type].min}-${ranges[type].max}]`}
+              })} placeholder={`[${ranges[type].min}-${ranges[type].max - 1}]`}
             />
             <Field.ErrorText>
               {getRangeErrorMessage(type, ranges[type].min)}
@@ -94,9 +94,9 @@ function resetFields() {
         {type && minValue && (
           <Field.Root invalid={!!errors.max}>
             <Field.Label> maximal value for {type}</Field.Label>
-            <Input width={{
+            <Input size="xs"  width={{
                 base: "80vw",
-                sm: "25vw"
+                sm: "20vw"
             }}
               {...register("max", {
                 required: true,
@@ -109,9 +109,9 @@ function resetFields() {
             </Field.ErrorText>
           </Field.Root>
         )}
-        <HStack marginTop={"5vh"}>
-        <Button type="submit" padding="2px" size="xs" bg={useColorModeValue("blue.500", "blue.200")}>Submit</Button>
-        <Button type="reset" padding="2px" size="xs" bg={useColorModeValue("blue.500", "blue.200")}>Reset</Button>
+        <HStack>
+        <Button type="submit" padding="0" size="xs" bg={useColorModeValue("blue.500", "blue.200")}>Submit</Button>
+        <Button type="reset" padding="0" size="xs" bg={useColorModeValue("blue.500", "blue.200")}>Reset</Button>
       </HStack>
       </Flex>
       
