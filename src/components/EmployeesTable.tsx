@@ -1,4 +1,4 @@
-import { Avatar, Spinner, Table, Text } from "@chakra-ui/react";
+import { Avatar, Box, Spinner, Table, Text } from "@chakra-ui/react";
 import useEmployees from "../hooks/useEmployees";
 import { QueryFunction } from "@tanstack/react-query";
 import Employee from "../model/Employee";
@@ -16,10 +16,12 @@ const EmployeesTable: FC<Props> = ({queryFn}) => {
       ) : (
         <>
           {isLoading && <Spinner></Spinner>}
-          <DepartmentSelector></DepartmentSelector>
-          <Table.ScrollArea borderWidth="1px" rounded="md" height="85vh" >
+          <Box marginLeft={"30vw"} marginBottom = "2vh">
+            <DepartmentSelector></DepartmentSelector>
+          </Box>
+          <Table.ScrollArea borderWidth="1px" rounded="md" height="50vh" >
             <Table.Root size="sm" stickyHeader className="table">
-              <Table.Header>
+              <Table.Header fontSize={{sm:"1.1rem",md:"1.2"}}>
                 <Table.Row bg="bg.subtle" zIndex={"auto"}>
                   <Table.ColumnHeader hideBelow={"md"}></Table.ColumnHeader>
                   <Table.ColumnHeader>Name</Table.ColumnHeader>

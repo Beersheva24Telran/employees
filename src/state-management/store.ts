@@ -1,16 +1,16 @@
-import { StatHelpText } from '@chakra-ui/react';
 import {create} from 'zustand'
+import SearchObject from '../model/SearchObject';
 interface EmployeesQuery {
    department:string | null;
-    min: number | null,
-    max: number | null
+   searchObject: SearchObject | null;
 
 }
 interface EmployeesStore {
     employeeQuery: EmployeesQuery;
+    setSearchObject:(searchObject:SearchObject) => void;
+    resetSearchObject: () => void
     setDepartment: (department: string|null) => void;
-    setMin: (min: number|null) => void;
-    setMax: (max: number|null) => void
+    
 }
 
 const useEmployeesQuery = create<EmployeesStore>(set => (
@@ -19,16 +19,14 @@ const useEmployeesQuery = create<EmployeesStore>(set => (
         setDepartment: (department: string | null) => set((state) => ({
             employeeQuery: {...state.employeeQuery, department}
         })),
-        setMin: (min: number | null) => set((state) => (
+        setSearchObject: (searchObject: SearchObject) => set((state) => (
             {
-                employeeQuery: {...state.employeeQuery, min}
+                employeeQuery: {...state.employeeQuery, searchObject}
             }
         )),
-        setMax: (max: number | null) => set((state) => (
-            {
-                employeeQuery: {...state.employeeQuery, max}
-            }
-        ))
+        resetSearchObject: () => set((state) => ({
+            employeeQuery: {...state.employeeQuery, searchObject:null}
+        }))
     }
 ))
 export default useEmployeesQuery;
