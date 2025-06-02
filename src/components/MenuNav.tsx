@@ -23,7 +23,7 @@ const [isOpen, setIsOpen] = useState<boolean>(false);
             onClick={() => setIsOpen(!isOpen)}
             fontSize={"1.2rem"}
           >
-            {icon && <Box>{icon}</Box>}
+            {icon && <Box hideBelow="sm" >{icon}</Box>}
             {label}
             {isOpen ? (
               <ComponentMotion duration={duration} timing={easeOut}>
