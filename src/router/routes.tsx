@@ -5,6 +5,7 @@ import HomePage from "../components/pages/HomePage";
 import SearchPage from "../components/pages/SearchPage";
 import AgeStatisticsPage from "../components/pages/AgeStatisticsPage";
 import { SalariesStatisticsPage } from "../components/pages/SalariesStatisticsPage";
+import AddEmployeePage from "../components/pages/AddEmployeePage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
           { path: "salaries", element: <SalariesStatisticsPage /> },
         ],
       },
+      {path: "add", element: <AddEmployeePage></AddEmployeePage>}
     ],
   },
 ]);

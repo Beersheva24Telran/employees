@@ -6,7 +6,7 @@ const useEmployees = (queryFn: QueryFunction<Employee[]>) => {
   return useQuery<Employee[], Error>({
     queryKey: ["employees", employeeQuery],
     queryFn,
-    staleTime: 5000
+    staleTime: 3600 * 1000
   })
 }
 

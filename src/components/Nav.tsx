@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 import { FiHome } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
 import { FcStatistics } from "react-icons/fc";
+import { IoMdPersonAdd } from "react-icons/io";
 import MenuNav from "./MenuNav";
 export interface NavItem {
     path: string;
@@ -15,10 +16,12 @@ export interface NavItem {
 }
 const navItems: NavItem[] = [
     {path: '/', label:'Home', icon: <FiHome></FiHome>},
+    {path: '/add', label: "Add Employee", icon: <IoMdPersonAdd></IoMdPersonAdd>},
     {path: '/search', label: 'Search', icon: <IoIosSearch></IoIosSearch>},
     {path: 'statistics', label: 'Statistics', icon: <FcStatistics ></FcStatistics>,children: [
         {path: 'statistics/ages',label: "Age Statistics"},
         {path: 'statistics/salaries',label: "Salary Statistics"},
+        {path: 'statistics/departments',label: "Department Statistics"},
 
     ]}
 ]

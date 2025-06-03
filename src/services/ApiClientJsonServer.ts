@@ -1,21 +1,36 @@
 import Employee from "../model/Employee";
 import ApiClient from "./ApiClient";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3000/employees",
 });
 class ApiClientJsonServer implements ApiClient {
-  addEmployee(empl: Employee): Promise<Employee> {
-    throw new Error("Method not implemented.");
+  async addEmployee(empl: Employee): Promise<Employee> {
+    const res = await axiosInstance.post<Employee>("/", empl);
+    return res.data;
   }
-  updateEmployee(id: number, empl: Partial<Employee>): Promise<Employee> {
-    throw new Error("Method not implemented.");
+  async updateEmployee(
+    id: string,
+    updater: Partial<Employee>
+  ): Promise<Employee> {
+    const res = await axiosInstance.patch<Employee>(`/${id}`, updater);
+    return res.data;
   }
-  deleteEmployee(id: number): Promise<void> {
-    throw new Error("Method not implemented.");
+  async deleteEmployee(id: string): Promise<Employee> {
+    const res = await axiosInstance.delete<Employee>(`/${id}`);
+    return res.data;
   }
-  getEmployee(id: number): Promise<Employee | null> {
-    throw new Error("Method not implemented.");
+  async getEmployee(id: string): Promise<Employee | null> {
+    let res = null;
+    try {
+      const response = await axiosInstance.get<Employee>(`/${id}`);
+      res = response.data;
+    } catch (error) {
+      if ((error as AxiosError).response?.status != 404) {
+        throw error;
+      }
+    }
+    return res;
   }
   async getAll(config?: { headers?: any; params?: any }): Promise<Employee[]> {
     const res = await axiosInstance.get<Employee[]>("/", config);
@@ -43,8 +58,10 @@ class ApiClientJsonServer implements ApiClient {
   ): Promise<Employee[]> {
     const dateMin = getDateFromAge(maxAge);
     const dateMax = getDateFromAge(minAge);
-    
-    return this.getAll(config).then(data => data.filter(e =>e.birthDate >= dateMin && e.birthDate <= dateMax ));
+
+    return this.getAll(config).then((data) =>
+      data.filter((e) => e.birthDate >= dateMin && e.birthDate <= dateMax)
+    );
   }
 }
 export const apiClient = new ApiClientJsonServer();

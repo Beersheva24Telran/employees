@@ -9,3 +9,10 @@ export function getDistributionItems(numbers: number[], interval: number): Distr
     return { min, max, amount: group.length, label: `${min}` };
 })
 }
+export function getDateFromAge(age: number): string {
+  const currentDate = new Date();
+  currentDate.setFullYear(currentDate.getFullYear() - age);
+  currentDate.setDate(1);
+  currentDate.setMonth(0);
+  return currentDate.toISOString().substring(0, 10);
+}
