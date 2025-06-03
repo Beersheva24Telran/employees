@@ -21,7 +21,7 @@ const [isOpen, setIsOpen] = useState<boolean>(false);
             size="sm"
             borderWidth={0}
             onClick={() => setIsOpen(!isOpen)}
-            fontSize={"1.2rem"}
+            fontSize={"1.1rem"}
           >
             {icon && <Box hideBelow="sm" >{icon}</Box>}
             {label}
