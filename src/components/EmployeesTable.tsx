@@ -57,7 +57,7 @@ const EmployeesTable: FC<Props> = ({queryFn}) => {
                     <Table.Cell  hideBelow={"sm"}>{empl.salary}</Table.Cell>
                     <Table.Cell  hideBelow={"sm"}>{empl.birthDate}</Table.Cell>
                     <Table.Cell  >
-                      <Button onClick={()=>deleteFun(empl)} bg={useColorModeValue("red.500", "red.200", "red.500", "red.200")}>DELETE</Button>
+                      <Button onClick={()=>deleteFun(empl)} bg={useColorModeValue("red.500", "red.200")}>DELETE</Button>
                     </Table.Cell>
                   </Table.Row>
                 ))}
