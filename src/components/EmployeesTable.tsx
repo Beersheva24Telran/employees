@@ -1,14 +1,26 @@
-import { Avatar, Box, Spinner, Table, Text } from "@chakra-ui/react";
+import { Avatar, Box, Spinner, Table, Text, Button } from "@chakra-ui/react";
 import useEmployees from "../hooks/useEmployees";
-import { QueryFunction } from "@tanstack/react-query";
+import { MutationFunction, QueryFunction } from "@tanstack/react-query";
 import Employee from "../model/Employee";
 import { FC } from "react";
 import DepartmentSelector from "./DepartmentSelector";
+import useEmployeesMutation from "../hooks/useEmployeesMutation";
+import { apiClient } from "../services/ApiClientJsonServer";
+import { useColorModeValue } from "./ui/color-mode";
 interface Props {
   queryFn: QueryFunction<Employee[]>
 }
 const EmployeesTable: FC<Props> = ({queryFn}) => {
+ 
   const { data: employees, error, isLoading } = useEmployees(queryFn);
+  const mutationDelete = useEmployeesMutation((id) => apiClient.deleteEmployee(id as string));
+  const mutationUpdate = useEmployeesMutation((updater) =>
+     apiClient.updateEmployee(updater as {id: string, empl: Partial<Employee>}))
+   function deleteFun(empl: Employee) {
+    if(confirm(`You are going to delete employee ${empl.fullName}`)) {
+      mutationDelete.mutate(empl.id);
+    }
+  }
   return (
     <>
       {error ? (
@@ -28,6 +40,7 @@ const EmployeesTable: FC<Props> = ({queryFn}) => {
                   <Table.ColumnHeader>Department</Table.ColumnHeader>
                   <Table.ColumnHeader  hideBelow={"sm"} >Salary</Table.ColumnHeader>
                   <Table.ColumnHeader  hideBelow={"sm"} >Birthdate</Table.ColumnHeader>
+                  <Table.ColumnHeader  ></Table.ColumnHeader>
                 </Table.Row>
               </Table.Header>
               <Table.Body>
@@ -43,6 +56,9 @@ const EmployeesTable: FC<Props> = ({queryFn}) => {
                     <Table.Cell>{empl.department}</Table.Cell>
                     <Table.Cell  hideBelow={"sm"}>{empl.salary}</Table.Cell>
                     <Table.Cell  hideBelow={"sm"}>{empl.birthDate}</Table.Cell>
+                    <Table.Cell  >
+                      <Button onClick={()=>deleteFun(empl)} bg={useColorModeValue("red.500", "red.200", "red.500", "red.200")}>DELETE</Button>
+                    </Table.Cell>
                   </Table.Row>
                 ))}
               </Table.Body>

@@ -10,10 +10,10 @@ class ApiClientJsonServer implements ApiClient {
     return res.data;
   }
   async updateEmployee(
-    id: string,
-    updater: Partial<Employee>
+    updater: {id: string,
+    empl: Partial<Employee>}
   ): Promise<Employee> {
-    const res = await axiosInstance.patch<Employee>(`/${id}`, updater);
+    const res = await axiosInstance.patch<Employee>(`/${updater.id}`, updater.empl);
     return res.data;
   }
   async deleteEmployee(id: string): Promise<Employee> {

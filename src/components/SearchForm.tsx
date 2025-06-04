@@ -119,11 +119,11 @@ function resetFields() {
         <Button type="submit" padding="0" size="xs" height={{
                 base: "2.5vh",
                 sm: "6vh"
-        }} bg={useColorModeValue("blue.500", "blue.200")}>Submit</Button>
+        }} bg={useColorModeValue("blue.500", "blue.200","blue.500", "blue.200")}>Submit</Button>
         <Button type="reset" padding="2px" height={{
                 base: "2.5vh",
                 sm: "6vh"
-        }}  size="xs" bg={useColorModeValue("blue.500", "blue.200")}>Reset</Button>
+        }}  size="xs" bg={useColorModeValue("blue.500", "blue.200","blue.500", "blue.200")}>Reset</Button>
       </HStack>
       </Flex>
       
