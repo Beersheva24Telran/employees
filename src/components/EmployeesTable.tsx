@@ -13,7 +13,7 @@ interface Props {
 }
 const EmployeesTable: FC<Props> = ({queryFn}) => {
  
-  const { data: employees, error, isLoading } = useEmployees(queryFn);
+  const { data: employees, isLoading } = useEmployees(queryFn);
   const mutationDelete = useEmployeesMutation((id) => apiClient.deleteEmployee(id as string));
   const mutationUpdate = useEmployeesMutation((updater) =>
      apiClient.updateEmployee(updater as {id: string, empl: Partial<Employee>}))
@@ -24,9 +24,7 @@ const EmployeesTable: FC<Props> = ({queryFn}) => {
   }
   return (
     <>
-      {error ? (
-        <Text>{error.message}</Text>
-      ) : (
+      { 
         <>
           {isLoading && <Spinner></Spinner>}
           <Box marginLeft={"30vw"} marginBottom = "2vh">
@@ -72,7 +70,7 @@ const EmployeesTable: FC<Props> = ({queryFn}) => {
             </Table.Root>
           </Table.ScrollArea>
         </>
-      )}
+      }
     </>
   );
 };

@@ -3,6 +3,7 @@ import ApiClient from "./ApiClient";
 import axios, { AxiosError } from "axios";
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3000/employees",
+  headers:{Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAdGVsLXJhbi5jb20iLCJpYXQiOjE3NDkwNDIwOTUsImV4cCI6MTc0OTA0NTY5NSwic3ViIjoidW5kZWZpbmVkIn0.vpUS_6N61cIZwT6aDDhbAFxHPotEU32sMutz5Bf6or4"}
 });
 class ApiClientJsonServer implements ApiClient {
   async addEmployee(empl: Employee): Promise<Employee> {
