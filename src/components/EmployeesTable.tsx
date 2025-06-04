@@ -7,6 +7,7 @@ import DepartmentSelector from "./DepartmentSelector";
 import useEmployeesMutation from "../hooks/useEmployeesMutation";
 import { apiClient } from "../services/ApiClientJsonServer";
 import { useColorModeValue } from "./ui/color-mode";
+import EditField from "./EditField";
 interface Props {
   queryFn: QueryFunction<Employee[]>
 }
@@ -53,8 +54,14 @@ const EmployeesTable: FC<Props> = ({queryFn}) => {
                       </Avatar.Root>
                     </Table.Cell>
                     <Table.Cell>{empl.fullName}</Table.Cell>
-                    <Table.Cell>{empl.department}</Table.Cell>
-                    <Table.Cell  hideBelow={"sm"}>{empl.salary}</Table.Cell>
+                    <Table.Cell><EditField field="department" oldValue={empl.department as string} submitter={(value)=>{
+                        mutationUpdate.mutate({id: empl.id, empl: {department:value}})
+                      }}></EditField></Table.Cell>
+                    <Table.Cell  hideBelow={"sm"}>
+                      <EditField field="salary" oldValue={empl.salary as number} submitter={(value)=>{
+                        mutationUpdate.mutate({id: empl.id, empl: {salary:value}})
+                      }}></EditField>
+                    </Table.Cell>
                     <Table.Cell  hideBelow={"sm"}>{empl.birthDate}</Table.Cell>
                     <Table.Cell  >
                       <Button onClick={()=>deleteFun(empl)} bg={useColorModeValue("red.500", "red.200")}>DELETE</Button>
