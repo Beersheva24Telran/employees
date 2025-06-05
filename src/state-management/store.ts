@@ -1,5 +1,6 @@
 import {create} from 'zustand'
 import SearchObject from '../model/SearchObject';
+import { UserData } from '../model/auth-data';
 interface EmployeesQuery {
    department:string | null;
    searchObject: SearchObject | null;
@@ -29,4 +30,18 @@ const useEmployeesQuery = create<EmployeesStore>(set => (
         }))
     }
 ))
+interface UserDataStore {
+    userData: UserData | null;
+    setUserData: (userData: UserData) => void;
+    resetUserData: () => void
+}
+export const useUserDataStore = create<UserDataStore>(set => ({
+    userData: null,
+    setUserData: (userData) => set(() => ({
+        userData
+    })),
+    resetUserData: () => set(() => ({
+        userData: null
+    }))
+}))
 export default useEmployeesQuery;

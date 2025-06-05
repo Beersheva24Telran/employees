@@ -7,6 +7,7 @@ import AgeStatisticsPage from "../components/pages/AgeStatisticsPage";
 import { SalariesStatisticsPage } from "../components/pages/SalariesStatisticsPage";
 import AddEmployeePage from "../components/pages/AddEmployeePage";
 import LoginPage from "../components/pages/LoginPage";
+import LogoutPage from "../components/pages/LogoutPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       { path: "", element: <HomePage /> },
       { path: "search", element: <SearchPage /> },
       {path: "login", element:<LoginPage></LoginPage>},
+      {path: "logout", element: <LogoutPage></LogoutPage>},
       {
         path: "statistics",
         children: [

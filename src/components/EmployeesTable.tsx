@@ -8,11 +8,12 @@ import useEmployeesMutation from "../hooks/useEmployeesMutation";
 import { apiClient } from "../services/ApiClientJsonServer";
 import { useColorModeValue } from "./ui/color-mode";
 import EditField from "./EditField";
+import { useUserDataStore } from "../state-management/store";
 interface Props {
   queryFn: QueryFunction<Employee[]>
 }
 const EmployeesTable: FC<Props> = ({queryFn}) => {
- 
+ const userData = useUserDataStore(s => s.userData)
   const { data: employees, isLoading } = useEmployees(queryFn);
   const mutationDelete = useEmployeesMutation((id) => apiClient.deleteEmployee(id as string));
   const mutationUpdate = useEmployeesMutation((updater) =>
@@ -39,7 +40,7 @@ const EmployeesTable: FC<Props> = ({queryFn}) => {
                   <Table.ColumnHeader>Department</Table.ColumnHeader>
                   <Table.ColumnHeader  hideBelow={"sm"} >Salary</Table.ColumnHeader>
                   <Table.ColumnHeader  hideBelow={"sm"} >Birthdate</Table.ColumnHeader>
-                  <Table.ColumnHeader  ></Table.ColumnHeader>
+                  {userData && userData.role==="ADMIN" && <Table.ColumnHeader  ></Table.ColumnHeader>}
                 </Table.Row>
               </Table.Header>
               <Table.Body>
@@ -52,18 +53,18 @@ const EmployeesTable: FC<Props> = ({queryFn}) => {
                       </Avatar.Root>
                     </Table.Cell>
                     <Table.Cell>{empl.fullName}</Table.Cell>
-                    <Table.Cell><EditField field="department" oldValue={empl.department as string} submitter={(value)=>{
+                    <Table.Cell>{userData && userData.role==="ADMIN" ? <EditField field="department" oldValue={empl.department as string} submitter={(value)=>{
                         mutationUpdate.mutate({id: empl.id, empl: {department:value}})
-                      }}></EditField></Table.Cell>
+                      }}></EditField> : empl.department}</Table.Cell>
                     <Table.Cell  hideBelow={"sm"}>
-                      <EditField field="salary" oldValue={empl.salary as number} submitter={(value)=>{
+                      {userData && userData.role==="ADMIN" ? <EditField field="salary" oldValue={empl.salary as number} submitter={(value)=>{
                         mutationUpdate.mutate({id: empl.id, empl: {salary:value}})
-                      }}></EditField>
+                      }}></EditField>:empl.salary}
                     </Table.Cell>
                     <Table.Cell  hideBelow={"sm"}>{empl.birthDate}</Table.Cell>
-                    <Table.Cell  >
+                    {userData && userData.role==="ADMIN" &&<Table.Cell  >
                       <Button onClick={()=>deleteFun(empl)} bg={useColorModeValue("red.500", "red.200")}>DELETE</Button>
-                    </Table.Cell>
+                    </Table.Cell>}
                   </Table.Row>
                 ))}
               </Table.Body>
