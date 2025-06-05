@@ -6,6 +6,7 @@ import SearchPage from "../components/pages/SearchPage";
 import AgeStatisticsPage from "../components/pages/AgeStatisticsPage";
 import { SalariesStatisticsPage } from "../components/pages/SalariesStatisticsPage";
 import AddEmployeePage from "../components/pages/AddEmployeePage";
+import LoginPage from "../components/pages/LoginPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     children: [
       { path: "", element: <HomePage /> },
       { path: "search", element: <SearchPage /> },
+      {path: "login", element:<LoginPage></LoginPage>},
       {
         path: "statistics",
         children: [
