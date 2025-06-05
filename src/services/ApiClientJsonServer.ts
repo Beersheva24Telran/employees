@@ -1,11 +1,16 @@
 import Employee from "../model/Employee";
 import ApiClient from "./ApiClient";
 import axios, { AxiosError } from "axios";
-const axiosInstance = axios.create({
+let axiosInstance = axios.create({
   baseURL: "http://localhost:3000/employees",
-  headers:{Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAdGVsLXJhbi5jb20iLCJpYXQiOjE3NDkwNDIwOTUsImV4cCI6MTc0OTA0NTY5NSwic3ViIjoidW5kZWZpbmVkIn0.vpUS_6N61cIZwT6aDDhbAFxHPotEU32sMutz5Bf6or4"}
 });
 class ApiClientJsonServer implements ApiClient {
+  setToken(token: string): void {
+    axiosInstance = axios.create ({
+      baseURL: "http://localhost:3000/employees",
+      headers: {Authorization: "Bearer " + token}
+    })
+  }
   async addEmployee(empl: Employee): Promise<Employee> {
     const res = await axiosInstance.post<Employee>("/", empl);
     return res.data;

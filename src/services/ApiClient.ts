@@ -1,6 +1,7 @@
 import Employee from "../model/Employee";
 
 export default interface ApiClient {
+    setToken(token: string): void;
     addEmployee(empl: Employee):Promise<Employee>;
     updateEmployee(updater:{id: string, empl: Partial<Employee>}): Promise<Employee>;
     deleteEmployee(id: string): Promise<Employee>
