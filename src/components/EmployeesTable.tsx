@@ -13,6 +13,7 @@ interface Props {
   queryFn: QueryFunction<Employee[]>
 }
 const EmployeesTable: FC<Props> = ({queryFn}) => {
+  const bgColor = useColorModeValue("red.500", "red200");
  const userData = useUserDataStore(s => s.userData)
   const { data: employees, isLoading } = useEmployees(queryFn);
   const mutationDelete = useEmployeesMutation((id) => apiClient.deleteEmployee(id as string));
@@ -63,7 +64,7 @@ const EmployeesTable: FC<Props> = ({queryFn}) => {
                     </Table.Cell>
                     <Table.Cell  hideBelow={"sm"}>{empl.birthDate}</Table.Cell>
                     {userData && userData.role==="ADMIN" &&<Table.Cell  >
-                      <Button onClick={()=>deleteFun(empl)} bg={useColorModeValue("red.500", "red.200")}>DELETE</Button>
+                      <Button onClick={()=>deleteFun(empl)} bg={bgColor}>DELETE</Button>
                     </Table.Cell>}
                   </Table.Row>
                 ))}

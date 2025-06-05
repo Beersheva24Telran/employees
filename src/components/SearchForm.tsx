@@ -19,6 +19,7 @@ const SearchForm = () => {
     const searchObject = useEmployeesQuery(s => s.employeeQuery.searchObject);
     const setSearchObject = useEmployeesQuery(s => s.setSearchObject);
     const resetSearchObject = useEmployeesQuery(s => s.resetSearchObject);
+    const bgColor = useColorModeValue("blue.500", "blue.200");
   const {
     register,
     resetField,
@@ -123,7 +124,7 @@ function resetFields() {
         <Button type="reset" padding="2px" height={{
                 base: "2.5vh",
                 sm: "6vh"
-        }}  size="xs" bg={useColorModeValue("blue.500", "blue.200")}>Reset</Button>
+        }}  size="xs" bg={bgColor}>Reset</Button>
       </HStack>
       </Flex>
       
