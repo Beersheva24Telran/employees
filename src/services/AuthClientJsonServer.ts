@@ -5,7 +5,7 @@ interface ResponseLoginData {
     accessToken: string;
     user: {
         email: string;
-        userId: string
+        id: string
     }
 }
  class AuthClientJsonServer implements AuthClient {
@@ -14,7 +14,7 @@ interface ResponseLoginData {
         try {
             const response = await axios.post<ResponseLoginData>("http://localhost:3000/login", loginData);
             const {user, accessToken} = response.data;
-            result = {role: user.userId, username: user.email,token: accessToken};
+            result = {role: user.id, username: user.email,token: accessToken};
         } catch (error) {
             const axiosError = error as AxiosError;
             if(!axiosError.response) {

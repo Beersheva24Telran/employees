@@ -1,6 +1,7 @@
 import {create} from 'zustand'
 import SearchObject from '../model/SearchObject';
 import { UserData } from '../model/auth-data';
+import { apiClient } from '../services/ApiClientJsonServer';
 interface EmployeesQuery {
    department:string | null;
    searchObject: SearchObject | null;
@@ -36,7 +37,7 @@ interface UserDataStore {
     resetUserData: () => void
 }
 export const useUserDataStore = create<UserDataStore>(set => ({
-    userData: null,
+    userData: getToken (),
     setUserData: (userData) => set(() => ({
         userData
     })),
@@ -44,4 +45,16 @@ export const useUserDataStore = create<UserDataStore>(set => ({
         userData: null
     }))
 }))
+function getToken(): UserData | null {
+
+    const json = localStorage.getItem("token");
+    console.log(json)
+    let userData: UserData|null = null;
+    if (json) {
+        userData = JSON.parse(json) as UserData
+        apiClient.setToken(userData.token);
+    }
+    return userData;
+
+}
 export default useEmployeesQuery;

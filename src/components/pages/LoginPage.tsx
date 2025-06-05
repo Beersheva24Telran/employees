@@ -12,9 +12,11 @@ const LoginPage = () => {
     const userData = useUserDataStore(s => s.userData);
 const submitter = async (loginData: LoginData) => {
     const res = await authClient.login(loginData);
+    console.log(res)
     if(res) {
             login(res);
-         apiClient.setToken(res!.token)
+         apiClient.setToken(res!.token);
+         localStorage.setItem("token", JSON.stringify(res))
     }
    
     return !!res

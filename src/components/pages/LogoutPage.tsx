@@ -4,10 +4,14 @@ import Logout from '../Logout';
 
 const LogoutPage = () => {
     const logout = useUserDataStore(s => s.resetUserData);
-    const userData = useUserDataStore(s => s.userData)
+    const userData = useUserDataStore(s => s.userData);
+    const submitter = () => {
+        localStorage.removeItem("token")
+        logout();
+    }
   return (
     <>
-    {userData ? <Logout submitter={() => logout()}/> : <Navigate to='/login'></Navigate>}
+    {userData ? <Logout submitter={submitter}/> : <Navigate to='/login'></Navigate>}
     </>
     
   )
